@@ -185,8 +185,15 @@ void FlowerTree::removeNode(Node* node){
 
         if (node->left == nullptr && node->right == nullptr) {
             cout<<"hello"<<endl;
-            delete node;
-            node = nullptr;
+            if(node== root){
+                delete root;
+                root = nullptr;
+            }else{
+                delete node;
+                node = nullptr;
+
+            }
+            
         } else if (node->left == nullptr) {
             cout<<"right"<<endl;
             node->flower = node->right->flower;
@@ -204,7 +211,8 @@ void FlowerTree::removeNode(Node* node){
                 suc = suc->left;
             }
             node->flower = suc->flower;
-            removeNode(suc);
+            delete suc;
+            suc = nullptr;
         }
     }
     else{
