@@ -9,7 +9,10 @@ FlowerTree::FlowerTree()
         : root(nullptr) {}
 
 FlowerTree::~FlowerTree() {
-    cleanup(root);
+   // cleanup(root);
+   while(root!= nullptr){
+        removeNode(root);
+    }
 }
 
 int FlowerTree::getHeight(Node* node) {
