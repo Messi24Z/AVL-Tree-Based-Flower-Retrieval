@@ -9,10 +9,8 @@ FlowerTree::FlowerTree()
         : root(nullptr) {}
 
 FlowerTree::~FlowerTree() {
-   // cleanup(root);
-   while(root!= nullptr){
-        removeNode(root);
-    }
+   cleanup(root);
+  
 }
 
 int FlowerTree::getHeight(Node* node) {
@@ -141,9 +139,9 @@ bool FlowerTree::comparePolyphenalOxidase(const std::string& id1, const std::str
 
 void FlowerTree::cleanup(Node* node) {
     // implement
-    while(root!= nullptr){
-        removeNode(node);
-    }
+    //while(root!= nullptr){
+       // removeNode(node);
+    //}
 }
 void FlowerTree::updateHeight(Node* node){
     int lHeight= -1;
