@@ -191,14 +191,14 @@ void FlowerTree::removeNode(Node* node){
         }
         node->flower = succNode->flower;
         removeNode(succNode);
-
+        return;
     }
     else if( node == root){
         if(node->left != nullptr)
             root = node->left;
         else
             root = node->right;
-        //return;
+        return;
     }
     else if(node->left!=nullptr)
         switchNodes(parentNode(node),node,node->left);
