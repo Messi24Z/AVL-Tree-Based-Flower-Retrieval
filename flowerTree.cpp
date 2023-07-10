@@ -138,7 +138,7 @@ bool FlowerTree::comparePolyphenalOxidase(const std::string& id1, const std::str
 
 void FlowerTree::cleanup(Node* node) {
     // implement
-    while(node!= nullptr){
+    while(root!= nullptr){
         removeNode(node);
     }
 }
