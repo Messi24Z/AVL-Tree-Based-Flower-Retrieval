@@ -2,6 +2,7 @@
 #define FLOWERTREE_H
 
 #include "flower.h"
+using namespace std;
 
 // AVL tree node
 class Node {
@@ -28,6 +29,10 @@ private:
     Node* balance(Node* node);
     Node* insertNode(Node* node, Flower* flower);
     void displayInOrder(Node* node);
+    void updateHeight(Node* node);
+    void switchNodes(Node* parent,Node* node1, Node* node2);
+    Node* parentNode(Node* node);
+    void removeNode(Node*);
 
 public:
     FlowerTree();
