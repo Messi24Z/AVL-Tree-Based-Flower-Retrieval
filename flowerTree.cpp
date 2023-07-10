@@ -181,34 +181,35 @@ Node* FlowerTree::parentNode(Node* node){
 
 }
 void FlowerTree::removeNode(Node* node){
-    if (node== nullptr){
-        cout<<"nothing to remove here"<<endl;
-    }
-    if (node->left!=nullptr and node->right!= nullptr ){
-        Node* succNode = node->right;
-        while(succNode->left!= nullptr){
-            succNode = succNode->left;
-        }
-        node->flower = succNode->flower;
-        removeNode(succNode);
-        return;
-    }
-    else if( node == root){
-        if(node->left != nullptr)
-            root = node->left;
-        else
-            root = node->right;
-        return;
-    }
-    else if(node->left!=nullptr)
-        switchNodes(parentNode(node),node,node->left);
-    else
-        switchNodes(parentNode(node),node,node->right);
+    if(root!= nullptr) {
 
-    //node = parentNode(node);
-   // while(node!= nullptr){
-        //balance(node);
-        //node = parentNode(node);
-   // }
+        if (node->left == nullptr && node->right == nullptr) {
+            cout<<"hello"<<endl;
+            delete node;
+            node = nullptr;
+        } else if (node->left == nullptr) {
+            cout<<"right"<<endl;
+            node->flower = node->right->flower;
+            delete node->right;
+            node->right = nullptr;
+        } else if (node->right == nullptr) {
+            cout<<"left"<<endl;
+            node->flower = node->left->flower;
+            delete node->left;
+            node->left = nullptr;
+        } else {
+            cout<<"all side"<<endl;
+            Node *suc = node->right;
+            while (suc->left != nullptr) {
+                suc = suc->left;
+            }
+            node->flower = suc->flower;
+            removeNode(suc);
+        }
+    }
+    else{
+        cout<<"there is nothing to be removed"<<endl;
+    }
+
 
 }
