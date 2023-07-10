@@ -205,10 +205,10 @@ void FlowerTree::removeNode(Node* node){
     else
         switchNodes(parentNode(node),node,node->right);
 
-    node = parentNode(node);
-    while(node!= nullptr){
-        balance(node);
-        node = parentNode(node);
-    }
+    //node = parentNode(node);
+   // while(node!= nullptr){
+        //balance(node);
+        //node = parentNode(node);
+   // }
 
 }
