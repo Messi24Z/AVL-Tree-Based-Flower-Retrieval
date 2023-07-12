@@ -30,9 +30,8 @@ private:
     Node* insertNode(Node* node, Flower* flower);
     void displayInOrder(Node* node);
     void updateHeight(Node* node);
-    void switchNodes(Node* parent,Node* node1, Node* node2);
     Node* parentNode(Node* node);
-    void removeNode(Node*);
+    
 
 public:
     FlowerTree();

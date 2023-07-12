@@ -9,8 +9,9 @@ FlowerTree::FlowerTree()
         : root(nullptr) {}
 
 FlowerTree::~FlowerTree() {
-   cleanup(root);
-  
+    cleanup(root);
+    
+
 }
 
 int FlowerTree::getHeight(Node* node) {
@@ -27,29 +28,25 @@ int FlowerTree::getBalanceFactor(Node* node) {
 
 Node* FlowerTree::rotateLeft(Node* z) {
     // implement
-    Node* rLNode= z->right->left;
-    if(z!=root){
-        switchNodes(parentNode(z),z,z->right);
-    }else{
-        root = z->right;
-
-    }
-    z->left = z->right;
-    z->right = rLNode;
+    Node* node = z;
+    Node* rNode = node->right;
+    node->right = rNode->left;
+    rNode->left = node;
+    updateHeight(node);
+    updateHeight(rNode);
+    return rNode;
 
 }
 
 Node* FlowerTree::rotateRight(Node* z) {
     // implement
-    Node* lRNode= z->left->right;
-    if(z!=root){
-        switchNodes(parentNode(z),z,z->left);
-    }else{
-        root = z->left;
-
-    }
-    z->right = z->left;
-    z->left = lRNode;
+    Node* node = z;
+    Node* lNode = node->left;
+    node->left= lNode->right;
+    lNode->right = node;
+    updateHeight(node);
+    updateHeight(lNode);
+    return lNode;
 }
 
 Node* FlowerTree::balance(Node* node) {
@@ -80,15 +77,15 @@ Node* FlowerTree::insertNode(Node* node, Flower* flower) {
         root = node;
         return node;
     }
-      else {
+    else {
         Node *curr = root;
 
         while (curr != nullptr) {
             if (node->flower->getPolyphenalOxidase() < curr->flower->getPolyphenalOxidase()) {
                 if (curr->left == nullptr) {
                     curr->left = node;
-
                     curr = nullptr;
+
                 } else
                     curr = curr->left;
             } else {
@@ -96,18 +93,20 @@ Node* FlowerTree::insertNode(Node* node, Flower* flower) {
                     curr->right = node;
 
                     curr = nullptr;
+
                 } else
                     curr = curr->right;
             }
 
         }
     }
-   node = parentNode(node);
-   while(node!= root){
+    node = parentNode(node);
+    while(node!= root){
         balance(node);
         node= parentNode(node);
     }
     return  node;
+
 }
 
 void FlowerTree::insert(Flower* flower) {
@@ -138,10 +137,16 @@ bool FlowerTree::comparePolyphenalOxidase(const std::string& id1, const std::str
 }
 
 void FlowerTree::cleanup(Node* node) {
-    // implement
-    while(root!= nullptr){
-        removeNode(node);
-    }
+   if(node== nullptr){
+       return;
+   }else{
+       cleanup(node->left);
+       cleanup(node->right);
+       delete node->flower;
+       delete node;
+      
+   }
+
 }
 void FlowerTree::updateHeight(Node* node){
     int lHeight= -1;
@@ -156,15 +161,9 @@ void FlowerTree::updateHeight(Node* node){
 
 
 }
-void FlowerTree::switchNodes(Node* parent,Node* curr, Node* node){
-    cout<<"hello"<<endl;
-    if(parent->left == curr)
-        parent->left = node;
-    else if(parent->right == curr)
-        parent->right = node;
 
 
-}
+
 Node* FlowerTree::parentNode(Node* node){
     if(node== root)
         return nullptr;
@@ -178,46 +177,5 @@ Node* FlowerTree::parentNode(Node* node){
         }
         return curr;
     }
-
-}
-void FlowerTree::removeNode(Node* node){
-    if(root!= nullptr) {
-
-        if (node->left == nullptr && node->right == nullptr) {
-            cout<<"hello"<<endl;
-            if(node== root){
-                delete root;
-                root = nullptr;
-            }else{
-                delete node;
-                node = nullptr;
-
-            }
-            
-        } else if (node->left == nullptr) {
-            cout<<"right"<<endl;
-            node->flower = node->right->flower;
-            delete node->right;
-            node->right = nullptr;
-        } else if (node->right == nullptr) {
-            cout<<"left"<<endl;
-            node->flower = node->left->flower;
-            delete node->left;
-            node->left = nullptr;
-        } else {
-            cout<<"all side"<<endl;
-            Node *suc = node->right;
-            while (suc->left != nullptr) {
-                suc = suc->left;
-            }
-            node->flower = suc->flower;
-            delete suc;
-            suc = nullptr;
-        }
-    }
-    else{
-        cout<<"there is nothing to be removed"<<endl;
-    }
-
 
 }
