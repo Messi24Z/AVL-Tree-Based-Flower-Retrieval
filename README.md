@@ -18,4 +18,22 @@ This project assignment will allow you to demonstrate your understanding of AVL 
 
 ![image](./tiger-lilly_flower_tree.png)
 
+challenges:
+there were many challenges to this project 
+the first one was the balance function. due to tha fact that the tree wasn't properly balancing took me a lot to identifie why my program was not working the way it was intended to work. 
+secondly the cleanup function also callenging to impliment. since it was not working it was hard to free all the allocated memories. 
+how to run the program:
+1st. creat a flowerTree object
+2nd. creat flower objects 
+then you can use the insert function to insert the flowers in to the tree
+use diplay function to see the flowers in your tree
+I added another function which displays the root of the tree. it helps us see if the tree is balancing allong the display function
+work flow:
+1) rotateright function rotates to the right by a given node
+2) rotate left does the opposit of rotate right
+3) balance function uses rotate functions to balance wile it uses getbaancefactor to detemine what kind of rotation the tree needs and where
+4) insert function does help to insert a node to our tree while it also self balaces using the balance function
+5) cleanup removes the nodes of a tree recurcivly
+6) diplay inorder function displays each flower from the tree by transversing inored and using the flowers classes display function
+70 diplayRoot function just displays the root of the tree
 
